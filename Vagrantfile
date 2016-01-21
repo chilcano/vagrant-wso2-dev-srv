@@ -27,40 +27,40 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # WSO2 STACK FOR DEVELOPMENT (SERVERS) #
   # ==================================== #
 
-  config.vm.define "wso2srv" do |wso2srv|
+  config.vm.define "wso2devsrv" do |wso2devsrv|
     # AM (offset +0)
-    wso2srv.vm.network "forwarded_port", guest: 9443, host: 9443
-    wso2srv.vm.network "forwarded_port", guest: 8280, host: 8280
+    wso2devsrv.vm.network "forwarded_port", guest: 9443, host: 9443
+    wso2devsrv.vm.network "forwarded_port", guest: 8280, host: 8280
 
     # ESB-01 (offset +6)
-    wso2srv.vm.network "forwarded_port", guest: 9449, host: 9449
-    wso2srv.vm.network "forwarded_port", guest: 8286, host: 8286
+    wso2devsrv.vm.network "forwarded_port", guest: 9449, host: 9449
+    wso2devsrv.vm.network "forwarded_port", guest: 8286, host: 8286
 
     # ESB-02 (offset +2)
-    wso2srv.vm.network "forwarded_port", guest: 9445, host: 9445
-    wso2srv.vm.network "forwarded_port", guest: 8282, host: 8282
+    wso2devsrv.vm.network "forwarded_port", guest: 9445, host: 9445
+    wso2devsrv.vm.network "forwarded_port", guest: 8282, host: 8282
 
     # DSS (offset +3)
-    wso2srv.vm.network "forwarded_port", guest: 9446, host: 9446
-    wso2srv.vm.network "forwarded_port", guest: 8283, host: 8283
+    wso2devsrv.vm.network "forwarded_port", guest: 9446, host: 9446
+    wso2devsrv.vm.network "forwarded_port", guest: 8283, host: 8283
 
     # GREG (offset +8)
-    wso2srv.vm.network "forwarded_port", guest: 9451, host: 9451
+    wso2devsrv.vm.network "forwarded_port", guest: 9451, host: 9451
 
     # WIREMOCK
-    wso2srv.vm.network "forwarded_port", guest: 7788, host: 7788
+    wso2devsrv.vm.network "forwarded_port", guest: 7788, host: 7788
 
     # RTAIL
-    wso2srv.vm.network "forwarded_port", guest: 8181, host: 8181
+    wso2devsrv.vm.network "forwarded_port", guest: 8181, host: 8181
 
     # ACTIVEMQ Web Admin Console
-    wso2srv.vm.network "forwarded_port", guest: 8161, host: 8161
+    wso2devsrv.vm.network "forwarded_port", guest: 8161, host: 8161
 
     # ESB 4.9.0 (offset +10)
-    wso2srv.vm.network "forwarded_port", guest: 9453, host: 9453
-    wso2srv.vm.network "forwarded_port", guest: 8290, host: 8290
+    wso2devsrv.vm.network "forwarded_port", guest: 9453, host: 9453
+    wso2devsrv.vm.network "forwarded_port", guest: 8290, host: 8290
 
-    wso2srv.vm.provider "virtualbox" do |vb|
+    wso2devsrv.vm.provider "virtualbox" do |vb|
       # Enable operations from VirtualBox GUI
       #vb.gui = true
 
@@ -74,15 +74,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vb.customize ["modifyvm", :id, "--ioapic", "on"]
 
       ### Install JDK and Ubuntu tools
-      wso2srv.vm.provision :shell, :path => "provision/wso2-stack-srv/shell/1_install_init.sh"
+      wso2devsrv.vm.provision :shell, :path => "provision/wso2-stack-srv/shell/1_install_init.sh"
 
       ### Download WSO2 files an other dependencies into guest VM
-      wso2srv.vm.provision :shell, :path => "provision/wso2-stack-srv/shell/2_download.sh"
+      wso2devsrv.vm.provision :shell, :path => "provision/wso2-stack-srv/shell/2_download.sh"
       
       ### Add/increase Sawp partition, valid for 'ubuntu/trusty64'
-      wso2srv.vm.provision :shell, :path => "provision/wso2-stack-srv/shell/3_add_swap.sh"
+      wso2devsrv.vm.provision :shell, :path => "provision/wso2-stack-srv/shell/3_add_swap.sh"
 
-      wso2srv.vm.provision "puppet" do |puppet|
+      wso2devsrv.vm.provision "puppet" do |puppet|
         puppet.manifests_path = "provision/wso2-stack-srv/puppet/manifests"
         puppet.manifest_file  = "site.pp"
         puppet.module_path = "provision/wso2-stack-srv/puppet/modules"

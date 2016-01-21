@@ -101,7 +101,7 @@ __Wiremock (as backend)__
 - The WSO2 Administrator username and password are `admin/admin`.
 
 
-## 2. Getting starting
+## 2. Getting started
 
 __1) Download the Vagrant scripts__
 
@@ -112,7 +112,7 @@ $ cd ~/github-repo/vagrant-wso2-dev-srv
 
 __2) Start the Vagrant box__
 
-The first time this process will take long time becuase the ISO Linux image and the WSO2 and required software have to be downloaded, unzipped and installed.
+The first time this process will take long time becuase the ISO Linux image and the WSO2 and required software have to be downloaded, unzipped, installed and provisioning the scripts.
 
 ```
 $ vagrant up
@@ -127,13 +127,13 @@ $ vagrant halt
 ```
 
 
-If you modify the Puppet scrips or change or open more ports, then you have to start with the flag `provision` and `reload` enabled, or both enabled.
+If you have modified the Puppet modules or Shell scrips, then you have to start with the flag `provision` and `reload` enabled, or both enabled, to re-provisioning to Vagrant.
 ```bash
 $ vagrant reload
 $ vagrant provision
 ```
 
-Reload and provision.
+Or reload and re-provision.
 ```bash
 $ vagrant reload --provision
 ```
@@ -208,7 +208,7 @@ To check what Linux services are running or enabled, just execute this in your V
 ```bash
 $ service --status-all
  ...
- [ + ]  wiremock
+ [ - ]  wiremock
  [ - ]  wso2am02a
  [ - ]  wso2dss01a
  [ - ]  wso2esb01a
@@ -282,21 +282,48 @@ This is because Puppet hasn't enable the `future parser`.
 ```
 To enable `future parser`in Puppet, just add this line `parser = future` to `/etc/puppet/puppet.conf`
 
-```
-$ sudo nano /etc/puppet/puppet.conf
+```bash
+Chilcano@Pisc0 : ~/1github-repo/vagrant-wso2-dev-srv
+$ vagrant ssh
+Welcome to Ubuntu 14.04.3 LTS (GNU/Linux 3.13.0-67-generic i686)
+
+ * Documentation:  https://help.ubuntu.com/
+
+  System information as of Thu Jan 21 12:13:12 UTC 2016
+
+  System load:  0.21              Processes:           85
+  Usage of /:   2.7% of 39.34GB   Users logged in:     0
+  Memory usage: 2%                IP address for eth0: 10.0.2.15
+  Swap usage:   0%
+[...]
+
+vagrant@vagrant-wso2-dev-srv:~$ sudo nano /etc/puppet/puppet.conf
 ```
 
-```
+```bash
 [main]
-...
+logdir=/var/log/puppet
+vardir=/var/lib/puppet
+ssldir=/var/lib/puppet/ssl
+rundir=/var/run/puppet
+factpath=$vardir/lib/facter
+templatedir=$confdir/templates
+prerun_command=/etc/puppet/etckeeper-commit-pre
+postrun_command=/etc/puppet/etckeeper-commit-post
 parser = future
 
 [master]
-....
+# These are needed when the puppetmaster is run by passenger
+# and can safely be removed if webrick is used.
+ssl_client_header = SSL_CLIENT_S_DN
+ssl_client_verify_header = SSL_CLIENT_VERIFY
 ```
 
 After that, restart your VM.
-
+```bash
+Chilcano@Pisc0 : ~/1github-repo/vagrant-wso2-dev-srv
+$ vagrant reload --provision
+```
 
 3.- Vagrant can't mouth folders (`Failed to mount folders in Linux guest. This is usually because ...`)
 

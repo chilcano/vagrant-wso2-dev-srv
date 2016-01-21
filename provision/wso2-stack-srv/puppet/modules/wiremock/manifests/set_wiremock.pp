@@ -32,8 +32,8 @@ class wiremock::set_wiremock (
 
   service { "ENABLE_INITD_${wiremock_server_name}":
     name   => "${wiremock_server_name}",
-    ensure => true,
-    enable => true
+    ensure => stopped,
+    enable => false
   }
 
 }
