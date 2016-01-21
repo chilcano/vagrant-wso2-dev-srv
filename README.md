@@ -10,7 +10,7 @@ This VM is suitable to develop with WSO2 products and puts focus only in the `se
 The main objetive is to have a VM with all WSO2 products installed and configured to be ready for development and following the most common Middleware infrastructure pattern used to create (Micro)services.
 The `naming` used in `hostnames` tries to use pre-defined values what also will be used in Integration and Production Environments. The `ports` and `offsets` used do not follow any special rule.
 
-![WSO2 Development Server Map](https://github.com/Chilcano/box-vagrant-wso2-dev-srv/blob/master/_downloads/chilcano-box-vagrant-wso2-dev-srv-map.png "WSO2 Development Server Map")
+![Vagrant WSO2 Development Server Map](https://github.com/chilcano/vagrant-wso2-dev-srv/blob/master/_downloads/chilcano-vagrant-wso2-dev-srv-map.png "Vagrant WSO2 Development Server Map")
 
 This VM tries to implement 2 tiers for the middleware and they are:
 
@@ -163,12 +163,7 @@ $ ./opt/%WSO2_SERVER_NAME%/bin/wso2server.sh -Dsetup
 [2015-11-11 07:21:21,701]  INFO - CarbonUIServiceComponent Mgt Console URL  : https://192.168.11.20:9449/carbon/
 ```
 
-Repeat this process for each WSO2 instance by replacing `%WSO2_SERVER_NAME%` for:
-* `wso2am02a`
-* `wso2esb01`
-* `wso2esb02`
-* `wso2dss01a`
-* `wso2greg01a` 
+Repeat this process for each WSO2 instance by replacing `%WSO2_SERVER_NAME%` for `wso2am02a`, `wso2esb01a`, `wso2esb02a`, `wso2dss01a` and `wso2greg01a`.
 
 To close the running server, just `CTRL+C` in the shell console where the server is running, this will release the shell console.
 
@@ -183,19 +178,12 @@ Using these `init.d` scripts the WSO2 instances will start as a Linux service an
 $ sudo service %WSO2_SERVER_NAME% start|stop|restart|status
 ```
 
-The `init.d` scripts available in `/etc/init.d/` match with the name of WSO2 and Wiremock instances and they are:
-* `wso2am02a`
-* `wso2esb01`
-* `wso2esb02`
-* `wso2dss01a`
-* `wso2greg01a`
-* `wiremock`
-
+The `init.d` scripts available in `/etc/init.d/` match with the name of WSO2 and Wiremock instances and they are `wso2am02a`, `wso2esb01a`, `wso2esb02a`, `wso2dss01a`, `wso2greg01a` and `wiremock`.
 
 
 ## 4. Enabling linux services to start automatically
 
-I have faced some troubles using `init.d` scripts in this Vagrant box (probably is because it is based on Ubuntu image) where I have lost the control of every server when starting, reloading and provisioning thi Vagrant box, for this reason I recommend you do not enable the services to start automatically on boot up.
+I have faced some troubles using `init.d` scripts in this Vagrant box (probably is because it is based on Ubuntu image) where I have lost the control of every server when starting, reloading and provisioning this Vagrant box, for this reason I recommend you do not enable the services to start automatically on boot up.
 
 I have removed the Puppet scripts to enable this functionality, but if you want do it, below are the commands:
 ```bash
