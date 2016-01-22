@@ -10,7 +10,7 @@ This VM is suitable to develop with WSO2 products and puts focus only in the `se
 The main objetive is to have a VM with all WSO2 products installed and configured to be ready for development and following the most common Middleware infrastructure pattern used to create (Micro)services.
 The `naming` used in `hostnames` tries to use pre-defined values what also will be used in Integration and Production Environments. The `ports` and `offsets` used do not follow any special rule.
 
-![Vagrant WSO2 Development Server Map](https://www.dropbox.com/s/845ei1w51jdgmu9/chilcano-logs-rtail-microservices-2-browsing.png?raw=1 "Vagrant WSO2 Development Server Map")
+![Vagrant WSO2 Development Server Map](https://github.com/chilcano/vagrant-wso2-dev-srv/blob/master/_downloads/chilcano-vagrant-wso2-dev-srv-map.png "Vagrant WSO2 Development Server Map")
 
 This VM tries to implement 2 tiers for the middleware and they are:
 
