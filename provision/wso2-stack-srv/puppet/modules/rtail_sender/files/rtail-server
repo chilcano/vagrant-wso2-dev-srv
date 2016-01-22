@@ -13,7 +13,7 @@
 USER="vagrant"
 PRODUCT_CODE="rTail"
 RTAIL_HOME="/opt/rtail"
-RTAIL_IP="10.0.2.15"
+RTAIL_IP="0.0.0.0"
 RTAIL_WP="8181"
 RTAIL_UP="9191"
 LOCK_FILE="$RTAIL_HOME/rtail.lck"
@@ -46,7 +46,7 @@ start() {
       then
         echo "[$PRODUCT_CODE] is running."
       else
-        echo -n "[$PRODUCT_CODE] is starting ... "
+        echo -n "[$PRODUCT_CODE] is starting."
         touch $LOCK_FILE
         su - $USER -c "$CMD_START > /dev/null 2>&1 &"
         sleep 5
@@ -70,7 +70,7 @@ stop() {
   PIDVAL=$?
   if [ $PIDVAL -eq 0 ]
       then
-         echo -n "[$PRODUCT_CODE] is being stopped ... "
+         echo -n "[$PRODUCT_CODE] is being stopped."
          su - $USER -c "$CMD_STOP $PID > /dev/null 2>&1 &"
          rm -f $LOCK_FILE
          sleep 5

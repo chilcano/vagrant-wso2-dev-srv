@@ -47,7 +47,7 @@ do_start() {
     then
       echo "[$SRV_NAME] is already sending logs to $PRODUCT_CODE."
     else
-      echo -n "[$SRV_NAME] is starting sending logs to $PRODUCT_CODE ... "
+      echo -n "[$SRV_NAME] is starting sending logs to $PRODUCT_CODE."
       touch $LOCK_FILE
       if [ $SRV_NAME = "wiremock" ]
         then
@@ -83,7 +83,7 @@ do_stop() {
   PIDVAL=$?
   if [ $PIDVAL -eq 0 ]
       then
-        echo -n "[$SRV_NAME] is stopping sending logs to $PRODUCT_CODE ... "
+        echo -n "[$SRV_NAME] is stopping sending logs to $PRODUCT_CODE."
         su - $USER -c "$CMD_STOP $PID > /dev/null 2>&1 &"
         rm -f $LOCK_FILE
         sleep 3

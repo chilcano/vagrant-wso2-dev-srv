@@ -10,7 +10,7 @@ This VM is suitable to develop with WSO2 products and puts focus only in the `se
 The main objetive is to have a VM with all WSO2 products installed and configured to be ready for development and following the most common Middleware infrastructure pattern used to create (Micro)services.
 The `naming` used in `hostnames` tries to use pre-defined values what also will be used in Integration and Production Environments. The `ports` and `offsets` used do not follow any special rule.
 
-![Vagrant WSO2 Development Server Map](https://github.com/chilcano/vagrant-wso2-dev-srv/blob/master/_downloads/chilcano-vagrant-wso2-dev-srv-map.png "Vagrant WSO2 Development Server Map")
+![Vagrant WSO2 Development Server Map](https://www.dropbox.com/s/845ei1w51jdgmu9/chilcano-logs-rtail-microservices-2-browsing.png?raw=1 "Vagrant WSO2 Development Server Map")
 
 This VM tries to implement 2 tiers for the middleware and they are:
 
@@ -144,6 +144,52 @@ __4) Get SSH access to the Vagrant box__
 $ vagrant ssh
 ```
 
+__5) Get SSH access to the Vagrant box__
+
+If for any reason you want left at a clean state (as if you never created the guest machine in the first place) or remove clompletly your Vagrant, then to use the follow:
+
+
+```bash
+# Stops the running Vagrant machine and destroy all created resources 
+# that were created during the machine creation process
+$ vagrant destroy
+
+
+# Remove completly the Vagrant machine
+$ cd vagrant-wso2-dev-srv
+$ vagrant box remove <NAME>
+
+# or
+$ vagrant box list
+kube-fedora21          (virtualbox, 0)
+puphpet/ubuntu1404-x64 (virtualbox, 2.0)
+ubuntu/trusty32        (virtualbox, 0)
+
+# Where <NAME> is, i.e. 'puphpet/ubuntu1404-x64'
+$ vagrant box remove <NAME>
+```
+
+__6) Vagrant Global Status__
+
+If you want to know the state of all active Vagrant environments on the system for the currently logged in user, to use the follow:
+
+```bash
+Chilcano@Pisc0 : ~/1github-repo/vagrant-wso2-dev-srv
+$ vagrant global-status
+id       name       provider   state    directory
+-------------------------------------------------------------------------------------------------------------------------
+02b5d3f  master     virtualbox poweroff /Users/Chilcano/1github-repo/shuttlecloud-docker-k8-workshop-20160116/kubernetes
+f4699ed  minion-1   virtualbox poweroff /Users/Chilcano/1github-repo/shuttlecloud-docker-k8-workshop-20160116/kubernetes
+2c03b60  wso2devsrv virtualbox running  /Users/Chilcano/1github-repo/vagrant-wso2-dev-srv
+
+The above shows information about all known Vagrant environments
+on this machine. This data is cached and may not be completely
+up-to-date. To interact with any of the machines, you can go to
+that directory and run Vagrant, or you can use the ID directly
+with Vagrant commands from any directory. For example:
+"vagrant destroy 1a2b3c4d"
+```
+
 
 ## 3. Starting the WSO2 servers and Wiremock
 
@@ -220,9 +266,14 @@ $ service --status-all
 
 ## 5. Monitoring the (Micro)services: Logging
 
-Check out these posts:
+This Vagrant box can be used as source of log events to feed or send them to other Box.
+I have used this Vagrant box to send log events of all WSO2 servers and Wiremock server to an ELK and rTail Server Docker container.
+This Vagrant box is prepared to send logs to ELK by using Filebeat and/or to rTail Server by broadcasting the log events as UDP traffic.
 
+Below, both strategies are explained.
+For rTail:
 - https://holisticsecurity.wordpress.com/2015/11/20/rtail-a-tool-to-collect-and-view-the-wso2-logs-in-a-browser
+For ELK:
 - https://holisticsecurity.wordpress.com/2016/01/19/log-events-management-wso2-microservices-elk-rtail-part-i
 
 

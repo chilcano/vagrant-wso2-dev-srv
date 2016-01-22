@@ -1,5 +1,4 @@
 class wso2esb {
-
   class { '::wso2esb::unzip_bundle':
     wso2esb_bundle_name => 'wso2esb-4.8.1',
     wso2_user_name => 'vagrant',
@@ -21,12 +20,10 @@ class wso2esb {
     wso2esb_bundle_name => 'wso2esb-4.8.1',
     wso2_user_name => 'vagrant',
     wso2_group_name => 'vagrant'
-  } 
-
+  }
 }
 
 class wso2am {
-
   class { '::wso2am::unzip_bundle':
     wso2_bundle_name => 'wso2am-1.8.0',
     wso2_user_name => 'vagrant',
@@ -48,12 +45,10 @@ class wso2am {
     wso2_bundle_name => 'wso2am-1.8.0',
     wso2_user_name => 'vagrant',
     wso2_group_name => 'vagrant'
-  } 
-
+  }
 }
 
 class wso2dss {
-
   class { '::wso2dss::unzip_bundle':
     wso2_bundle_name => 'wso2dss-3.5.0',
     wso2_user_name => 'vagrant',
@@ -75,12 +70,10 @@ class wso2dss {
     wso2_bundle_name => 'wso2dss-3.5.0',
     wso2_user_name => 'vagrant',
     wso2_group_name => 'vagrant'
-  } 
-
+  }
 }
 
 class wso2greg {
-
   class { '::wso2greg::unzip_bundle':
     wso2_bundle_name => 'wso2greg-5.1.0',
     wso2_user_name => 'vagrant',
@@ -103,11 +96,9 @@ class wso2greg {
     wso2_user_name => 'vagrant',
     wso2_group_name => 'vagrant'
   } 
-
 }
 
 class activemq {
-
   class { '::activemq::untargzip_bundle':
     bundle_name => 'apache-activemq-5.12.1-bin.tar.gz',
     user_name => 'vagrant',
@@ -130,11 +121,9 @@ class activemq {
     user_name => 'vagrant',
     group_name => 'vagrant'
   } 
-
 }
 
 class wso2esb490 {
-
   class { '::wso2esb490::unzip_bundle':
     wso2_bundle_name => 'wso2esb-4.9.0',
     wso2_user_name => 'vagrant',
@@ -157,18 +146,20 @@ class wso2esb490 {
     wso2_user_name => 'vagrant',
     wso2_group_name => 'vagrant'
   } 
-
 }
 
 class wiremock { 
-
   class { '::wiremock::set_wiremock': 
     wiremock_bundle_name => 'wiremock-standalone-2.0.8-beta.jar',
     wiremock_server_name => 'wiremock',
     wiremock_user_name => 'vagrant',
     wiremock_group_name => 'vagrant'
- } 
+  } 
+}
 
+class rtail_sender { 
+  class { '::rtail_sender::install_and_run_sender': 
+  } 
 }
 
 file { '/home/vagrant/.bashrc':
@@ -217,6 +208,7 @@ include wso2esb
 include wso2am
 include wso2dss
 include wso2greg
-include wiremock
 include activemq
 include wso2esb490
+include wiremock
+include rtail_sender
