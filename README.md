@@ -25,7 +25,7 @@ This VM tries to implement 2 tiers for the middleware and they are:
 - Altough WSO2 AM has different deployment patterns and WSO2 AM (Gateway) should be in the front tier, I have placed WSO2 AM (Gateway, Publisher, Store and Key Manager) in this tier.
 
 **The Backend**
-- I wanna use Wiremock as mock server to implement REST and SOAP services.
+- I will use Wiremock as mock server to implement REST and SOAP services.
 
 
 If you have the jar and zip files previously downloaded, just place your files under `%VM_VAGRANT_HOME%/_downloads/`
@@ -144,7 +144,7 @@ __4) Get SSH access to the Vagrant box__
 $ vagrant ssh
 ```
 
-__5) Get SSH access to the Vagrant box__
+__5) Other operations with the Vagrant box__
 
 If for any reason you want left at a clean state (as if you never created the guest machine in the first place) or remove clompletly your Vagrant, then to use the follow:
 

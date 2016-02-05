@@ -1,0 +1,43 @@
+#~/.multitailrc
+
+#### rename this file as '/home/vagrant/.multitailrc'
+
+# See documentation
+# https://github.com/flok99/multitail/blob/master/multitail.conf
+#
+# Get this file right! If you don't multitail will just crash.
+# No warning, no error, just won't start. And it's your fault.
+
+# Include default file as well (this will parse AFTER this file!)
+# Haven't found way to pre-parse file, and then overwrite defaults yet.
+# include:/etc/multitail.conf
+
+
+#### ======================== ================== ####
+#~/.bash_profile
+# alias mt='multitail -CS wso2'
+#### ======================== ================== ####
+
+# avoid mail error
+check_mail:0
+
+#### ================== wso2 ===================== ####
+colorscheme:wso2
+# java package
+cs_re:blue,,bold:\s\{([a-zA-Z_$][a-zA-Z\d_$]*\.)*[a-zA-Z_$][a-zA-Z\d_$]*\}\s
+cs_re:blue,,bold:\s\{([a-zA-Z_$][a-zA-Z\d_$]*\.)*[a-zA-Z_$][a-zA-Z\d_$]*\}$
+# type of wso2 product
+cs_re:red,,bold:\[AM\]
+cs_re:magenta,,bold:\[ESB\]
+cs_re:blue,,bold:\[DSS\]
+cs_re:cyan,black,bold:\[GREG\]
+cs_re:white,black,bold:\[BAM\]
+# tenant id
+cs_re:green,,bold:TID\:\s\[\S\]
+# level
+cs_re:red,black,bold:(ERROR)
+cs_re:yellow,black,bold:(NOTICE|WARN)
+cs_re:cyan,black,bold:(INFO|DEBUG)
+# initial dash symbol of log message
+cs_re:red,,bold:\s-\s
+
