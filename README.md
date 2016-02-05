@@ -90,7 +90,7 @@ __WSO2 ESB (back tier)__
 __Wiremock (as backend)__
 * Port: 7788
 * Hostname: wiremock
-* Version: 1.57-standalone
+* Version: ~~1.57-standalone~~ 2.0.8-beta
 * URL: [http://localhost:7788/__admin](http://localhost:7788/__admin)
 * Useful to implement mock services (REST and SOAP)
 
